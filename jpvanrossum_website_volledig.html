@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stichting J.P. van Rossum - Gemoderniseerd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #d4af37;
+            --bg-color: #f9f7f1;
+            --text-color: #333;
+            --light-bg: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+
+        /* Navbar */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 0 auto;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            cursor: pointer;
+            padding: 5px 0;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        /* Page Content */
+        .page-section {
+            display: none;
+            padding: 120px 5% 50px;
+            min-height: 100vh;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section for Home */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url("images/valkeveen.jpg") center/cover fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 {
+            color: var(--secondary-color);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Stats Container */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: -90px 5% 50px;
+            position: relative;
+            z-index: 10;
+        }
+        .stat-box {
+            background: var(--light-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            border-bottom: 4px solid var(--secondary-color);
+            transition: transform 0.3s;
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+        .stat-box i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        .stat-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        .stat-box p {
+            font-size: 0.95rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        .quick-link-card {
+            background: var(--light-bg);
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        .quick-link-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .quick-link-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+        .quick-link-card:hover i {
+            color: var(--secondary-color);
+        }
+        .quick-link-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 60px 0 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-banner::before {
+            content: '\f19c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.03;
+            right: -20px;
+            top: -50px;
+            transform: rotate(-15deg);
+        }
+        .cta-banner h2 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-banner p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary-color);
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-button:hover {
+            background: transparent;
+            color: var(--secondary-color);
+        }
+
+        /* Cards Layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--light-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border-top: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .card-img {
+            height: 180px;
+            background-color: #eef;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 3rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-img {
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Text Block */
+        .text-block {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            border-left: 6px solid var(--secondary-color);
+            position: relative;
+        }
+        
+        .text-block h2 {
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        
+        .text-block p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        /* Timeline for Donateursdagen */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .timeline-item {
+            padding: 20px 30px 20px 60px;
+            background: var(--light-bg);
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            border: 4px solid var(--bg-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 75vh;
+            border-radius: 5px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            object-fit: contain;
+            position: relative;
+        }
+        .modal-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-top: 15px;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 2001;
+        }
+        .modal-close:hover {
+            color: var(--secondary-color);
+        }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s;
+            background: rgba(0,0,0,0.5);
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 2001;
+        }
+        .modal-nav:hover {
+            color: var(--secondary-color);
+            background: rgba(0,0,0,0.8);
+        }
+        .modal-prev {
+            left: 20px;
+        }
+        .modal-next {
+            right: 20px;
+        }
+
+        /* NIEUW: Info icoon en beschrijving in de Modal */
+        .info-icon {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 2rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: color 0.3s, transform 0.2s;
+            display: none; /* Standaard verborgen, wordt getoond met JS indien tekst aanwezig is */
+            z-index: 2001;
+        }
+        .info-icon:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        .modal-desc-box {
+            display: none;
+            position: absolute;
+            bottom: 120px; /* Zweeft boven de onderkant van het scherm/foto */
+            max-width: 600px;
+            width: 80%;
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 2002;
+            font-size: 1.1rem;
+            border: 1px solid var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeInBottom 0.3s ease-out forwards;
+        }
+        .modal-desc-box.show {
+            display: block;
+        }
+
+        @keyframes fadeInBottom {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo" onclick="showPage('home')"><i class="fa-solid fa-landmark-dome"></i> J.P. van Rossum</a>
+        <ul class="nav-links">
+            <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+            <li><a onclick="showPage('achtergrond')" id="nav-achtergrond">Achtergrondinformatie</a></li>
+            <li><a onclick="showPage('huizen')" id="nav-huizen">Huizen</a></li>
+            <li><a onclick="showPage('collectie')" id="nav-collectie">Collectie</a></li>
+            <li><a onclick="showPage('publicaties')" id="nav-publicaties">Publicaties</a></li>
+            <li><a onclick="showPage('donateursdagen')" id="nav-donateursdagen">Donateursdagen</a></li>
+            <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page-section active">
+        <div class="hero">
+            <h1>Stichting J.P. van Rossum</h1>
+            <p>Welkom op de vernieuwde website. Het behouden en toegankelijk maken van historische gegevens, landgoederen en buitenplaatsen.</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <i class="fa-solid fa-landmark"></i>
+                <h3>1992</h3>
+                <p>Jaar van oprichting</p>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-tree-city"></i>
+                <h3>19+</h3>
+                <p>Historische Huizen</p>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-box-archive"></i>
+                <h3>25+</h3>
+                <p>Jaar aan donateursdagen</p>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin: 80px 0 30px; font-size: 2.2rem; color: var(--primary-color);">Ontdek Onze Historie</h2>
+        <div class="quick-links">
+            <div class="quick-link-card" onclick="showPage('huizen')">
+                <i class="fa-solid fa-house-chimney-window"></i>
+                <h3>Landgoederen</h3>
+                <p>Verken de rijke geschiedenis van de buitenplaatsen op het voormalig grondgebied.</p>
+            </div>
+            <div class="quick-link-card" onclick="showPage('collectie')">
+                <i class="fa-solid fa-magnifying-glass-location"></i>
+                <h3>Het Archief</h3>
+                <p>Bekijk onze uitgebreide, gedigitaliseerde collectie van foto's, brieven en kaarten.</p>
+            </div>
+            <div class="quick-link-card" onclick="showPage('donateursdagen')">
+                <i class="fa-solid fa-calendar-check"></i>
+                <h3>Bijeenkomsten</h3>
+                <p>Lees meer over de traditie van onze jaarlijkse wandelingen en donateursdagen.</p>
+            </div>
+        </div>
+
+        <div class="text-block" style="margin-top: 60px;">
+            <h2>In memoriam</h2>
+            <p><strong>Tot verdriet van ons allen is op 16 juni jl. onze ere-voorzitster Ank Kooijman - van Rossum overleden.</strong></p>
+            <p>Ank was, naast Joris Dudok van Heel en Hein Hogerzeil, in 1992 een van de oprichters en een drijvende kracht achter de stichting J.P. van Rossum. Met haar aanstekelijk enthousiasme heeft ze veel historisch materiaal verzameld en familieleden verbonden, wat onder andere resulteerde in jaarlijkse donateursdagen, waar veel familieleden en bewoners van huizen in het gebied van J.P. van Rossum bij elkaar komen.</p>
+            <p>Verder heeft Ank ervoor gezorgd dat zeer veel stukken van de families Van Rossum, Dudok van Heel, Kuhn en Mijnssen een plaats hebben gekregen in het Archief Gooi en Vechtstreek in Naarden-Vesting. Samen met Henk Schaftenaar heeft Ank een aantal publicaties op haar naam staan, aangaande landgoederen van J.P. van Rossum en zijn nakomelingen. Naast oprichtster van onze stichting was zij ook nog oprichtster van de stichting Oude Begraafplaats Naarden. We gaan haar missen.</p>
+            <p><em>Mede namens de bestuursleden Elisabeth Bonga - Sigmond en Johan Gesink, Joost Kuhn</em></p>
+        </div>
+
+        <div class="text-block">
+            <h2>Over de Stichting</h2>
+            <p>De Stichting is opgericht in 1992 en beheert inmiddels een omvangrijke collectie foto's, schilderijen, brieven, kaarten en andere documenten, die ondergebracht zijn in het Stads- en Streekarchief van Naarden. Deze website heeft mede tot doel het toegankelijk maken voor donateurs en andere belangstellenden van historische foto's, archiefstukken en publicaties.</p>
+            <p>Door de digitalisering van diverse collectie-items kunnen volgende generaties naar behoefte kennis nemen van bedoelde historische gegevens en objecten. Jaarlijks organiseert de stichting een donateursdag, indien mogelijk op een locatie binnen het voormalige grondgebied van J.P. van Rossum.</p>
+            <p>De doelstelling van de Stichting is enerzijds het verzamelen en archiveren van historische gegevens en objecten betreffende de persoon van Joannes Petrus van Rossum (1778-1856), betreffende de geschiedenis van de landgoederen en buitenplaatsen gelegen tussen Naarden, Bussum en Huizen en behorende tot het voormalige grondbezit van J.P. van Rossum en betreffende de eigenaren en/of bewoners van deze landgoederen en buitenplaatsen.</p>
+            <p>Anderzijds stelt de Stichting zich ten doel, daar waar mogelijk, bij te dragen aan het handhaven van het landschappelijk karakter van bedoelde landgoederen en buitenplaatsen.</p>
+        </div>
+
+        <div class="cta-banner">
+            <h2>Draag bij aan de geschiedenis</h2>
+            <p>Wilt u meehelpen aan het behouden en toegankelijk maken van ons historisch erfgoed? Neem contact met ons op voor meer informatie over donateurschap, evenementen of archiefstukken.</p>
+            <a onclick="showPage('contact')" class="cta-button">Word Donateur <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+    </section>
+
+    <!-- ACHTERGRONDINFORMATIE -->
+    <section id="achtergrond" class="page-section">
+        <h1 style="text-align: center; margin-bottom: 40px;">Achtergrondinformatie</h1>
+        <div class="text-block">
+            <h2>Doelstelling van de Stichting</h2>
+            <p>De doelstelling van de Stichting is enerzijds het verzamelen en archiveren van historische gegevens en objecten betreffende de persoon van Joannes Petrus van Rossum (1778-1856), betreffende de geschiedenis van de landgoederen en buitenplaatsen gelegen tussen Naarden, Bussum en Huizen en behorende tot het voormalige grondbezit van J.P. van Rossum en betreffende de eigenaren en/of bewoners van deze landgoederen en buitenplaatsen.</p>
+            <p>Anderzijds stelt de Stichting zich ten doel, daar waar mogelijk, bij te dragen aan het handhaven van het landschappelijk karakter van bedoelde landgoederen en buitenplaatsen.</p>
+            <br>
+            <h2>Het Digitaal Archief</h2>
+            <p>Het digitale historisch archief van de Stichting J.P. van Rossum is ontwikkeld in 2012. De stichting heeft zich tot doel gesteld de ontwikkelingsgeschiedenis van de vele landgoederen die in de strook van Naarden naar Huizen in de loop der eeuwen tot stand zijn gekomen, te onderzoeken en vast te leggen.</p>
+            <p>Met J.P. van Rossum en zijn nazaten zijn een groot aantal namen van landgoederen, buitenplaatsen en huizen verbonden. Van Rossum en zijn gezin gingen in de jaren dertig van de negentiende eeuw op 'Zandbergen' wonen. Op vaders erfgrond werden later door kinderen en kleinkinderen van van Rossum nieuwe huizen, boerderijen en soms ook bedrijven gesticht.</p>
+        </div>
+    </section>
+
+    <!-- HUIZEN -->
+    <section id="huizen" class="page-section">
+        <h1 style="text-align: center; margin-bottom: 20px;">Landgoederen en Huizen</h1>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; color: #555;">Een prachtig overzicht van de historische huizen, buitenplaatsen en landgoederen verbonden aan de geschiedenis van J.P. van Rossum.</p>
+        
+        <div class="text-block">
+            <h2 style="text-align: center;">Buitenplaatsen en landgoederen</h2>
+            <p>Met J.P. van Rossum en zijn nazaten zijn een groot aantal namen van landgoederen, buitenplaatsen en huizen verbonden. Van Rossum en zijn gezin gingen in de jaren dertig van de negentiende eeuw op 'Zandbergen' wonen. Op vaders erfgrond werden later door kinderen en kleinkinderen van van Rossum nieuwe huizen, boerderijen en soms ook bedrijven gesticht. Thans is nog maar een klein deel van het omvangrijke grondbezit van van Rossum in handen van nazaten.</p>
+            <p>Enkele landhuizen zijn inmiddels afgebroken, maar van het negentiende-eeuwse parklandschap zijn gelukkig grote stukken behouden. In 2002 heeft de Stichting J.P. van Rossum een kaart uitgegeven, waarop de diverse buitenplaatsen zijn ingetekend. Deze kaart wordt op de website gebruikt om de locaties van de huizen zichtbaar te maken. Op de website presenteren wij van een aantal van de huizen een selectie van het beschikbare fotomateriaal.</p>
+        </div>
+        
+        <div class="card-grid" id="huizen-grid">
+            <!-- Dynamisch ingeladen met JS -->
+        </div>
+    </section>
+
+    <!-- COLLECTIE -->
+    <section id="collectie" class="page-section">
+        <h1 style="text-align: center; margin-bottom: 20px;">Onze Collectie</h1>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; color: #555;">Ontdek de rijkdom van ons gedigitaliseerde archief. Blader door kaarten, brieven en zeldzame portretten.</p>
+        
+        <div class="card-grid" id="collectie-grid">
+            <!-- Dynamisch ingeladen met JS -->
+        </div>
+    </section>
+
+    <!-- PUBLICATIES -->
+    <section id="publicaties" class="page-section">
+        <h1 style="text-align: center; margin-bottom: 40px;">Publicaties</h1>
+        
+        <div class="text-block">
+            <h2>Om te lezen</h2>
+            <p>Over het onderwerp waarmee de Stichting J.P. van Rossum zich bezighoudt zijn in de achterliggende decennia een groot aantal publicaties verschenen. Een belangrijke rol daarbij speelt de Stichting Vijverberg. Deze werd opgericht in 1989 en heeft als doelstelling: "de bevordering van het bestuderen, vastleggen en verbreiden van historische- en historisch geografische kennis van Naarden en haar omgeving".</p>
+            <p>Om deze doelstelling te verwezenlijken geeft de stichting het historisch tijdschrift voor Naarden 'De Omroeper' uit. De stichting ontleent haar naam aan de 'Vijverberg', de uitzichtheuvel van de buitenplaats 'Oud Naarden'. Op de website van de stichting (<a href="http://www.stichtingvijverberg.nl" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-weight: bold;">www.stichtingvijverberg.nl</a>) kan de index geraadpleegd worden van het tijdschrift 'De Omroeper'.</p>
+        </div>
+        
+        <div class="card-grid" id="publicaties-grid">
+            <!-- Dynamisch ingeladen met JS -->
+        </div>
+    </section>
+
+    <!-- DONATEURSDAGEN -->
+    <section id="donateursdagen" class="page-section">
+        <h1 style="text-align: center; margin-bottom: 40px;">Historie van Donateursdagen</h1>
+        
+        <div class="text-block">
+            <h2>Donateursdagen</h2>
+            <p>Sinds de oprichting van de Kring J.P. van Rossum in 1991 komen jaarlijks donateurs en belangstellenden bij elkaar voor een lezing, de uitreiking van een publikatie, een wandeling over een van de landgoederen, maar vooral voor ontmoeting met elkaar. Na de oprichting van de Stichting J.P. van Rossum op 14 april 1992 hebben er inmiddels vele donateursdagen plaatsgevonden, die goed bezocht werden door minstens 30 à 40 belangstellenden.</p>
+            <p>Meestal waren we te gast op een van de landgoederen, die zo verbonden zijn met de stichting J.P. van Rossum. Tijdens deze bijeenkomsten zijn vele foto's gemaakt, waarvan wij hier een selectie presenteren. Van veel van de bijeenkomsten bestaan ook een of meer groepsfoto's, die een goed beeld geven van de belangstelling voor de donateursdagen.</p>
+        </div>
+
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Een overzicht van de bijzondere bijeenkomsten die sinds 1991 zijn georganiseerd voor onze trouwe donateurs en familieleden. <strong>Klik op een jaartal om de foto's te bekijken.</strong></p>
+        
+        <div class="timeline" id="donateursdagen-timeline">
+            <!-- Dynamisch ingeladen met JS -->
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page-section">
+        <h1 style="text-align: center; margin-bottom: 40px;">Neem Contact Op</h1>
+        
+        <div class="text-block" style="text-align: center; margin-bottom: 40px;">
+            <h3 style="color: var(--secondary-color); margin-bottom: 15px;">Bestuur Stichting J.P. van Rossum</h3>
+            <p style="font-size: 1.2rem; font-weight: 500;">
+                Elisabeth Bonga - Sigmond<br>
+                Johan Gesink<br>
+                Joost Kuhn
+            </p>
+        </div>
+        
+    </section>
+
+    <footer>
+        <p>Copyright &copy; Stichting J.P. van Rossum</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #ccc;">Disclaimer | Reglement persoonsgegevens</p>
+    </footer>
+
+    <!-- Modal/Lightbox -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-nav modal-prev" onclick="changeImage(-1)">&#10094;</div>
+        
+        <img class="modal-content" id="modalImage" src="" alt="Uitgelichte afbeelding">
+        
+        <!-- NIEUW: Beschrijvingsvak en Info icoon -->
+        <div class="modal-desc-box" id="modalDescBox"></div>
+        <div class="info-icon" id="infoIcon" onclick="toggleInfo()" title="Klik voor meer informatie">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+        
+        <div class="modal-title" id="modalCaption"></div>
+        <div class="modal-nav modal-next" onclick="changeImage(1)">&#10095;</div>
+    </div>
+
+    <script>
+        // Navigatie Logica
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById('nav-' + pageId).classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // NIEUW: Voorbeeld van beschrijvingen toegevoegd aan de eerste paar objecten in huizenData.
+        const huizenData = [
+            { 
+                naam: "Oud Valkeveen", 
+                afbeeldingen: ["images/valkeveen.jpg", "images/valkeveen_1.jpg", "images/valkeveen_kaart.jpg"],
+                beschrijvingen: [
+                    "Het herenhuis Valkeveen, zoals het was vóór de vernielingen tijdens het beleg van Naarden in de winter van 1813 - 1814. Dit was de buitenplaats in haar zeventiende eeuwse vorm van F. Hugues (1739 - 1818), de schoonvader van J.P. van Rossum. Hugues bleef tot zijn dood op 10 juni 1818 op zijn 'hofstede' wonen. Eén van zijn dochters, Jeanne Marie Louise, die in 1805 J.P. van Rossum huwde, vertoefde er vaak met haar gezin. Van Rossum was zeer gesteld op Valkeveen. Daar ging hij vaak met zijn kinderen in de Valkeveense bossen wandelen. Geliefde plekjes vond hij in het Gravenveld en op en rond de Venusberg (Leeuwenberg). Over de Zeelaan ging het gezin menigmaal naar het strand. Daar stond een rieten tent waar zijn kinderen vaak speelden. Van Rossum liet een tekening maken van het aanzicht van de hofstede aan het begin van de negentiende eeuw. Het moet een waarheidsgetrouw beeld zijn van de voorgevel van het herenhuis. Uit latere archivalia is op te maken dat dit eigenlijk het voorhuis was. Er achter en eraan vast stond de boerderij. Op de afbeelding is een huis te zien van drie etages met een souterrain. Het dak was volgens J.P. van Rossum van riet en voor de ingang lag een voorname stoep van arduin. Voor het huis stonden niet al te dikke lindebomen. Waarschijnlijk groeiden deze op de stobben van hun voorgangers, want van Rossum sprak over 'de oude lindebomen'.", 
+                    "Van Waard tekende omstreeks 1815 het hernieuwde en gerestaureerd huis Valkeveen na de vernielingen van 1813-1814. A. Brouwer maakte er een litho van. Van Rossum is nà het beleg van Naarden en nà de restauratie van het huis op 'Valkeveen' gaan wonen. In de entree is J.P. van Rossum zelf te zien, met aan zijn handen zijn dochters Hermine en Mimie. Op 3 juni 1854 dichtte J.P. van Rossum over de restauratie van Valkeveen als volgt: Eer 't huis herbouwd was en met gevels opgesierd; Toen 't ouderwetsche dak, een prachtig vierkant wierd, 't welk ik, in plaats van riet, met pannen deed bedekken. Na alles was voltooid, voldaan was aan bestekken, Liet ik daar de afteek'ning van maken, door van Waard, Waarvan ge op steendruk hier, in 't klein, van Brouwer staart.", 
+                    "Oud Valkeveen kaart"
+                ]
+            }, 
+            { 
+                naam: "Berghuis", 
+                afbeeldingen: ["images/berghuis.jpg", "images/berghuis_1.jpg", "images/berghuis_2.jpg", "images/berghuis_3.jpg", "images/berghuis_4.jpg", "images/berghuis_5.jpg", "images/berghuis_6.jpg", "images/berghuis_7.jpg", "images/berghuis_8.jpg", "images/berghuis_9.jpg", "images/berghuis_10.jpg", "images/berghuis_11.jpg", "images/berghuis_12.jpg", "images/berghuis_kaart.jpg" ],
+                beschrijvingen: [
+                    "In 1816 deed J.P. van Rossum zijn eerste twee grondaankopen ten oosten van Naarden: Berghuysen en Kommerrust. Dit was het begin van een uitgebreid bezit aan grond en huizen. Eind negentiende eeuw was het twaalf hectare grote landgoed Berghuis in bezit van de familie Kuhn. Na de dood van Henry Kuhn (1840-1912) erfde zijn dochter A.M.J. Dudok van Heel-Kuhn (1865-1963) deze buitenplaats. Het echtpaar Dudok van Heel-Kuhn liet in 1913 onder architect Kruisweg door aannemer Jurriëns uit Naarden dit huis bouwen op de heuvel waar ooit de hofstede Berghuysen had gestaan (verwoest in 1814 door de Fransen tijdens het beleg van Naarden) en nadien de sierkoepel van J.P. van Rossum.",
+                    "Ruwe schets van het huys en den berg der hofsteede Berghuysen: A. Het huis B. en C. De berg met opgang en aan de achterzijde twee stenen trappen D. Het hek voor de Plaats. Deze schets dateert van geruime tijd voor het beleg van Naarden door de Fransen in 1813/1814. Tijdens dit beleg werd het huis verwoest. Van Rossum kocht het landgoed Berghuysen in 1816 en liet bovenop de heuvel de Lucknow koepel neerzetten.",
+                    "Detail van een olieverfschilderij omstreeks 1850: de Lucknow koepel op de heuvel van Berghuis, het pronkjuweel van J.P. van Rossum. De kleurrijke sierlijke koepel stond op de fundamenten van het in 1814 verwoeste huis Berghuysen. Als voorbeeld voor dit praalgebouw diende de hoofdmoskee van Lucknow in India.",
+                    "Bij de opdeling van Van Rossums bezit in 1856 werd Berghuys afgescheiden van het Oude Bos en de voormalige zanderij bij Flevorama en daarmee weer teruggebracht tot de zeventiende eeuwse afmetingen. Dit ruim 12 hectare grote Berghuys werd voor Fl 15.000,= verkocht aan de Amsterdamse makelaar H.F. Tjeenk (1807-1894). Tjeenk was een liefhebber van tuinbouw en kweken van planten en zette het werk van J.P. van Rossum voort. Op deze foto uit de jaren zeventig van de negentiende eeuw zit de heer H.F. Tjeenk voor een van zijn verwarmde kassen op Berghuys.",
+                    "Foto van de Oranjerie (jaren zeventig negentiende eeuw).",
+                    "De heer Tjeenk, eigenaar van Berghuys van 1856-1878, liet omstreeks 1870 (?) Monte Casa bouwen. Een jachthuisje in chaletachtige stijl, dat vernoemd werd naar het terrein waar het op stond: 'Monte Casa'. In 1878 werd Henry Kuhn, kleinzoon van J.P. van Rossum, eigenaar van Berghuis. Monte Casa diende jarenlang als opslagplaats voor het allerbeste product van de zaadveredeling van de firma Kuhn & Co.",
+                    "De haven tussen Berghuis en Flevorama: Jan in 'Albatros', Duuk in 'Tromp', Duif in de tjotter van de Duif, Henri met een been op het land, Erik in het schip van Erik en Onno, Papa en Mama aan de kant, foto 1904 door H.W. Kuhn.",
+                    "Achterzijde van de foto van de haven tussen Berghuis en Flevorama. Tekst van H.C. Brandt (1889-1971) gehuwd met H.F. Dudok van Heel (1893-1967).",
+                    "Op de bevroren vijver van Berghuis zien we rechts A.M.J. Dudok van Heel-Kuhn (1865-1963) samen met drie kinderen en vier speelkameraadjes. De foto dateert vermoedelijk uit 1908.",
+                    "Dit verhaal over de oude tulpenboom van Berghuis, van de hand van Henk Schaftenaar, verscheen in de Omroeper van maart 2003, jaargang 16 nummer 1.",
+                    "Het einde van de tulpenboom (B).",
+                    "Het einde van de tulpenboom (C).",
+                    "Berghuis, voorzijde.",
+                    "Berghuis op de landgoederenkaart uit 2002."
+                ]
+            },
+            { 
+                naam: "Kommerrust", 
+                afbeeldingen: ["images/kommerrust.jpg", "images/kommerrust_1.png", "images/kommerrust_2.jpg", "images/kommerrust_3.jpg", "images/kommerrust_4.jpg", "images/kommerrust_5.png", "images/kommerrust_kaart.jpg"],
+                beschrijvingen: [
+                    "De buitenplaats Kommerrust is in 1640 door Joannes Uytenbogaert (1628-1680) gesticht. Tijdens de afzanding in de 18de eeuw van het noordelijke deel van deze 'lusthof' zijn het herenhuis en de boerderij gesloopt. In 1816 kocht J.P. van Rossum alle gronden en boerderij van deze voormalige buitenplaats.",
+                    "Kommerrust kaart.",
+                    "Kommerrust zijaanzicht.",
+                    "Kommerrust overzicht.",
+                    "De nieuwe aanbouw van de boerderij Kommerrust.",
+                    "Kommerrust aanzicht.",
+                    "Kommerrust detail."
+                ]
+            },
+            { 
+                naam: "Zandbergen", 
+                afbeeldingen: ["images/zandbergen.jpg", "images/zandbergen_1.jpg", "images/zandbergen_2.png", "images/zandbergen_3.jpg", "images/zandbergen_4.jpg", "images/zandbergen_5.jpg", "images/zandbergen_6.jpg", "images/zandbergen_7.jpg", "images/zandbergen_8.jpg", "images/zandbergen_9.jpg", "images/zandbergen_10.jpg", "images/zandbergen_11.jpg", "images/zandbergen_kaart.jpg"],
+                beschrijvingen: [
+                    "Waar nu aan de Amersfoortsestraatweg de serviceflat Zandbergen staat, werd omstreeks 1688 logement 'De Sandberg' gebouwd. Na herbouw (na brand in 1813) kocht J.P. van Rossum het pand in 1820. Hij noemde zijn nieuwe verblijf 'Zandbergen'. Op de afbeelding een steendruk van A. Brouwer met op de achtergrond de grote kerk van Naarden en aan de rechterzijde het oude 'De Sandberg'.",
+                    "Zandbergen kaart.",
+                    "Het eerste Zandbergen, een houten huis (1820-1860) met familie voor het huis.",
+                    "Zandbergen omstreeks 1860, getekend en gesigneerd door H.M.E. van Rossum - Dudok van Heel.",
+                    "Gezicht op de herberg Jan Tabak (voorheen het logement 'De Sandberg' genaamd), kijkend langs de Amersfoortse straatweg vanuit Naarden Vesting in Oostelijke richting.",
+                    "De ingang en voortuin van Zandbergen met zicht op de Amersfoortsestraatweg en in de verte het nieuwe Jan Tabak. Olieverfschilderij van Van Ravenswaay van omstreeks 1850.",
+                    "Zicht op de achterzijde van Zandbergen met hooiberg en daarvoor het studeervertrek van J.P. van Rossum. Rechts van de zanderijsloot ligt het weiland genaamd De Kakebeen. Steendruk van omstreeks 1850 van Anthonius Brouwer.",
+                    "Het kakebeen van een walvis stond in het weiland achter het oude Zandbergen, waar van Rossum tot zijn dood woonde.",
+                    "Zandbergen, in 1869 gebouwd door H. Kuhn, een kleinzoon van J.P. van Rossum. Foto van H.W. Kuhn uit circa 1955.",
+                    "Zandbergen met appelschuur in de sneeuw met op de achtergrond Casa Cara.",
+                    "Gezicht op Naarden vanuit de eerste verdieping van Zandbergen. Foto uit circa 1950, waarop duidelijk de kerktoren van Naarden Vesting is te zien.",
+                    "De afbraak van Zandbergen in 1959.",
+                    "De bouw van de huidige serviceflat Zandbergen in 1960."
+                ]
+            },
+            { 
+                naam: "Flevorama", 
+                afbeeldingen: ["images/flevorama.jpg", "images/flevorama_1.jpg", "images/flevorama_2.jpg", "images/flevorama_3.jpg", "images/flevorama_4.jpg", "images/flevorama_5.jpg", "images/flevorama_6.jpg", "images/flevorama_7.jpg", "images/flevorama_kaart.jpg"],
+                beschrijvingen: [
+                    "Al in 1816 deed J.P. van Rossum zijn eerste grondaankopen ten oosten van Naarden. In 1840 besloot van Rossum tot de bouw van het eerste Flevorama met op het platte dak een belvédère van waaruit men Huizen, Valkeveen en de Zuiderzee kon zien liggen.",
+                    "Flevorama kaart.",
+                    "Olieverf op houten paneel van A. Brouwer (33x43 cm), waarop afgebeeld het voormalige Flevorama met belvédère. Dit buitenverblijf liet J.P. van Rossum omstreeks 1840 bouwen op de plek van de tabaksschuur.",
+                    "Quasi Latijnse tekst achterop het houten paneel van A. Brouwer, waarop het voormalige Flevorama is afgebeeld.",
+                    "Olieverfschilderij door A. Brouwer omstreeks 1850. Uitzicht op Nieuw Valkeveen vanuit de belvédère Flevorama. Met het grote dak en de vier stevige schoorstenen manifesteert zich het huis Nieuw Valkeveen.",
+                    "Foto uit 1862.",
+                    "Foto begin twintigste eeuw.",
+                    "Weiland voor Flevorama met rood bonte lakenvelders (foto uit 1997).",
+                    "Luchtfoto van omstreeks 1970."
+                ]
+            },
+            { 
+                naam: "Nieuw Valkeveen", 
+                afbeeldingen: ["images/nieuw_valkeveen.jpg", "images/nieuw_valkeveen_1.jpg", "images/nieuw_valkeveen_2.jpg", "images/nieuw_valkeveen_3.jpg", "images/nieuw_valkeveen_4.png", "images/nieuw_valkeveen_5.jpg", "images/nieuw_valkeveen_6.jpg", "images/nieuw_valkeveen_7.jpg", "images/nieuw_valkeveen_8.jpg", "images/nieuw_valkeveen_9.jpg", "images/nieuw_valkeveen_10.jpg", "images/nieuw_valkeveen_11.jpg", "images/nieuw_valkeveen_12.jpg", "images/nieuw_valkeveen_kaart.jpg"],
+                beschrijvingen: [
+                    "J.P. van Rossum deed in 1816 zijn eerste grondaankoop in het gebied ten oosten van Naarden. Zijn groeiend grondbezit leidde in 1844 tot het bouwen van een statig herenhuis dat hij 'Nieuw Valkeveen' noemde.",
+                    "Nieuw Valkeveen kaart.",
+                    "De achterzijde van Nieuw Valkeveen vóór de verbouwing van circa 1860. Afkomstig uit het schetsboek van J.W. Mijnssen.",
+                    "Olieverfschilderij door A. Brouwer omstreeks 1850, dat veel verrassende details laat zien. Uitzicht op Nieuw Valkeveen vanuit de belvédère Flevorama.",
+                    "Koepel op de Koepelberg op Nieuw Valkeveen. De familie Hogerzeil - Mijnssen heeft van 1911 - 1928 op Nieuw Valkeveen gewoond.",
+                    "Paardenbrug met Drafna op de achtergrond.",
+                    "Voorzijde gezien vanaf de Huizerstraatweg. Datering: circa 1910.",
+                    "Toegangsbrug en voortuin Nieuw Valkeveen (foto H.W. Kuhn).",
+                    "Foto uit de glasplaten collectie Hogerzeil (circa 1920).",
+                    "Vijver Nieuw Valkeveen met op de achtergrond de Chemische Fabriek. Foto 1921 uit glasplaten collectie Hogerzeil.",
+                    "Op deze foto uit circa 1991 is duidelijk te zien dat de originele sierdaklijsten niet langer op het dak staan. Deze werden in de jaren '70 verwijderd.",
+                    "Op deze foto uit circa 1991 wordt de aandacht expliciet gericht op het markante hekwerk in de voordeur van Nieuw Valkeveen.",
+                    "Tijdens een felle uitslaande brand werd Nieuw Valkeveen op 17 juli 2008 volledig verwoest.",
+                    "De sloop van het huis Nieuw Valkeveen met het rijke verleden."
+                ]
+            },
+            { 
+                naam: "Boerderij Nieuw Valkeveen", 
+                afbeeldingen: ["images/boerderij_nieuw_valkeveen.jpg", "images/boerderij_nieuw_valkeveen_1.jpg", "images/boerderij_nieuw_valkeveen_2.jpg", "images/boerderij_nieuw_valkeveen_3.jpg", "images/boerderij_nieuw_valkeveen_4.jpg", "images/boerderij_nieuw_valkeveen_5.jpg", "images/boerderij_nieuw_valkeveen_kaart.jpg"],
+                beschrijvingen: [
+                    "De boerderij 'Nieuw Valkeveen' werd in 1866 door J.W. Mijnssen (1809-1880) gesticht op de plek waar aanvankelijk het door J.P. van Rossum gebouwde boerderijtje Zeezigt stond. Foto van omstreeks 1880.",
+                    "Boerderij Nieuw Valkeveen kaart.",
+                    "Ter herinnering aan de bouw van de boerderij Nieuw Valkeveen in opdracht van het echtpaar Mijnssen - van Rossum werd op 30 juni 1866 de eerste steen gelegd door Adolphine Mijnssen.",
+                    "Het pontje tussen het landgoed Nieuw Valkeveen en de boerderij Nieuw Valkeveen.",
+                    "De verwaarloosde boerderij werd in 1907 verkocht aan G.H. den Tex.",
+                    "Op de foto uit omstreeks 1895 het huisje van Jacobus Wesseling, de tuinbaas van 'Nieuw Valkeveen', gelegen naast de boerderij.",
+                    "Op deze foto uit omstreeks 1910 de door Mr. G.M. den Tex gekochte tuinmanswoning. De foto is kort voor de ingrijpende verbouwing gemaakt."
+                ]
+            },
+            { 
+                naam: "Drafna", 
+                afbeeldingen: ["images/drafna.jpg", "images/drafna_1.jpg", "images/drafna_2.jpg", "images/drafna_3.jpg", "images/drafna_4.jpg", "images/drafna_5.png", "images/drafna_6.png", "images/drafna_7.jpg", "images/drafna_8.jpg"],
+                beschrijvingen: [
+                    "Dit Zwitserse chalet was de inzending van Zwitserland op de eerste wereldtentoonstelling te Parijs in 1860. Joannes Petrus Dudok van Heel kocht dit als geschenk voor z'n vrouw. Het chalet is per spoor en dekschuit naar Naarden vervoerd. (Foto omstreeks 1867).",
+                    "Drafna kaart.",
+                    "Tegeltableau, gesigneerd: Amphora - Holland met tekst door Paddy (C.P.) Gülcher over de historie van Drafna.",
+                    "Gezicht op Drafna en op de Paardenbrug vanuit Nieuw Valkeveen.",
+                    "Foto van omstreeks 1870.",
+                    "Foto van omstreeks 1880.",
+                    "Briefkaart met daarop een tekening van Drafna. Op de achterzijde een tekst van P.H. Witkamp.",
+                    "Tekst op de achterzijde van een briefkaart (van de voorgaande afbeelding).",
+                    "Foto van omstreeks 1900."
+                ]
+            },
+            { 
+                naam: "Oud Naarden", 
+                afbeeldingen: ["images/oud-naarden.jpg"],
+                beschrijvingen: [
+                    "Rond 1420 ontstond op de plek van het omstreeks 1350 verwoeste oude Naarden aan de kust van de Zuiderzee de kloostergemeenschap 'Convent van Oud Naarden'. Na de Reformatie kwamen deze goederen onder beheer van het stadsbestuur. In 1864 kocht J.P. Dudok van Heel de hofstede Oud Naarden."
+                ]
+            },
+            { 
+                naam: "Casa Cara", 
+                afbeeldingen: ["images/casa_cara.jpg", "images/casa_cara_1.jpg", "images/casa_cara_2.png", "images/casa_cara_kaart.jpg"],
+                beschrijvingen: [
+                    "Casa Cara werd in 1863 gebouwd tegenover 'Zandbergen' aan de Amersfoortsestraatweg voor J.M.W. Kuhn - van Rossum (1818-1906). Zij heeft daar tot aan haar dood gewoond. Casa Cara is kort na 1945 afgebroken.",
+                    "Casa Cara kaart.",
+                    "Casa Cara zijaanzicht.",
+                    "Casa Cara aanzicht."
+                ]
+            },
+            { 
+                naam: "Oud Bussem", 
+                afbeeldingen: ["images/oud_bussem.jpg", "images/oud_bussem_1.jpg", "images/oud_bussem_2.jpg", "images/oud_bussem_3.jpg", "images/oud_bussem_4.jpg", "images/oud_bussem_kaart.jpg"],
+                beschrijvingen: [
+                    "Oud Bussem was sedert 1825 in het bezit van A. Bredius. J. van Woensel Kooy (1878 - 1903) was eigenaar van het landgoed tot 1903. Het 'oude' huis Oud Bussem is in 1929 gesloopt en vervangen door een 'nieuw' Oud Bussem.",
+                    "Oud Bussem kaart.",
+                    "Oud Bussem detail.",
+                    "Oud Bussem aanzicht.",
+                    "Oud Bussem zijaanzicht.",
+                    "Oud Bussem."
+                ]
+            },
+            { 
+                naam: "Klein Rubroeck", 
+                afbeeldingen: ["images/klein_rubroeck.jpg", "images/klein_rubroeck_1.jpg", "images/klein_rubroeck_kaart.jpg"],
+                beschrijvingen: [
+                    "Volgens de notariële akte kocht Dr. W.A. van Dorp (1847-1914) op 1 april 1885 een halve hectare grond met een eenvoudig houten huis te Naarden. Het houten huis werd vergroot en kreeg de naam 'Klein Rubroeck'.",
+                    "Klein Rubroeck kaart.",
+                    "Herinneringen aan het oude huis 'Klein Rubroeck' door mevrouw H.G. Rueb-van Dorp. Op de foto 'Klein Rubroeck' omstreeks 1908 met de Amersfoortsestraatweg en het laantje (nu Breughellaantje)."
+                ]
+            },
+            { 
+                naam: "De Viersprong", 
+                afbeeldingen: ["images/de_viersprong.jpg", "images/de_viersprong_1.png", "images/de_viersprong_2.jpg", "images/de_viersprong_kaart.jpg"],
+                beschrijvingen: [
+                    "In 1898 werd door A.E. Dudok van Heel (1859-1924) in de hoek van het weiland voor 'Flevorama' als Noors bouwpakket 'De Viersprong' gebouwd. Het houten huis brandde in 1912 volledig af en werd daarna herbouwd.",
+                    "De Viersprong kaart.",
+                    "De viersprong vóór de brand van 1912. Op de achtergrond is links van De Viersprong Drafna te zien.",
+                    "De Viersprong herbouwd na de brand van 1912. Deze foto is vermoedelijk kort na de herbouw gemaakt omstreeks 1915."
+                ]
+            },
+            { 
+                naam: "De Bongerd", 
+                afbeeldingen: ["images/de_bongerd.jpg", "images/de_bongerd_1.jpg", "images/de_bongerd_2.jpg", "images/de_bongerd_3.jpg", "images/de_bongerd_kaart.jpg"],
+                beschrijvingen: [
+                    "Dit huis is in het begin van de twintigste eeuw gebouwd voor G.F. Dudok van Heel (1860 - 1934). Later is hij naar het nieuw gebouwde 'Zuiderhof' verhuisd. De plek waar De Bongerd ooit stond maakt nu deel uit van het Naardense Componistenkwartier.",
+                    "De Bongerd kaart.",
+                    "De Bongerd.",
+                    "De Bongerd.",
+                    "De Bongerd."
+                ]
+            },
+            { 
+                naam: "Den Hul", 
+                afbeeldingen: ["images/den_hul.jpg", "images/den_hul_1.jpg", "images/den_hul_2.jpg", "images/den_hul_kaart.jpg"],
+                beschrijvingen: [
+                    "Dit huis is in 1901 aan de Amersfoortsestraatweg tegenover 'Zandbergen' voor H.W. Kuhn (1864 - 1957) gebouwd en korte tijd door hem bewoond voordat hij met zijn echtgenote verhuisde naar 'Zandbergen'. Op de plek waar ooit Den Hul stond, staat nu een kantoor.",
+                    "Den Hul kaart.",
+                    "Den Hul aanzicht.",
+                    "Den Hul."
+                ]
+            },
+            { 
+                naam: "De Limiten", 
+                afbeeldingen: ["images/de_limiten.jpg", "images/de_limiten_1.jpg", "images/de_limiten_2.jpg", "images/de_limiten_3.jpg", "images/de_limiten_4.jpg", "images/de_limiten_5.jpg", "images/de_limiten_6.png", "images/de_limiten_kaart.jpg"],
+                beschrijvingen: [
+                    "In 1905 werd in opdracht van Adolphine van Woensel Kooij-Mijnssen (1855-1915) op de grens van Naarden en Huizen het landhuis de Limiten gebouwd. Het ontwerp was van architect Th. W. Rueter.",
+                    "De Limiten kaart.",
+                    "Op deze foto uit omstreeks 1910 is goed te zien dat De Limiten gebouwd is op een terrein dat een voormalige zanderij was van J.P. van Rossum. Het huis ligt op een heuvel.",
+                    "De Limiten aanzicht.",
+                    "De Limiten overzicht.",
+                    "Uitzicht vanaf het terras van de Limiten, over de zanderij richting de Valkeveenselaan.",
+                    "De Limiten in de winter.",
+                    "Ginko: de verbouwde voormalige tuinmanswoning van de Limiten, gelegen naast de ingang van het grote huis aan de Naarderstraat. Aquarel uit 1924 door Willy van Woensel Kooy."
+                ]
+            },
+            { 
+                naam: "Oldenheem", 
+                afbeeldingen: ["images/oldenheem.jpg", "images/oldenheem_1.jpg", "images/oldenheem_2.jpg", "images/oldenheem_kaart.jpg"],
+                beschrijvingen: [
+                    "In 1913-1914 werd dit huis gebouwd voor het echtpaar S.A.C. Dudok van Heel (1866-1930) en J.M.W. Dudok van Heel - Louwerse (1868 - 1935). Op dezelfde plek stond voorheen de 'Oude Viersprong'.",
+                    "Oldenheem kaart.",
+                    "De oude 'Viersprong', geschilderd door Cornelis Bijlard (1813-1855). In 1826 kocht J.P. van Rossum de 'Naarderzanderij' en liet er een huis bouwen.",
+                    "De Oude Viersprong, tweede aanzicht."
+                ]
+            },
+            { 
+                naam: "Zuiderhof", 
+                afbeeldingen: ["images/zuiderhof.jpg", "images/zuiderhof_1.jpg", "images/zuiderhof_2.jpg", "images/zuiderhof_3.jpg", "images/zuiderhof_4.jpg", "images/zuiderhof_5.jpg", "images/zuiderhof_kaart.jpg"],
+                beschrijvingen: [
+                    "Zuiderhof is in 1929 gebouwd in opdracht van G.F. Dudok van Heel (1860 - 1934), die op De Bongerd woonde. Het huis werd door architect Rebel uit Laren gebouwd langs het talud van het terrein van Flevorama.",
+                    "Zuiderhof kaart.",
+                    "Zuiderhof.",
+                    "Zuiderhof.",
+                    "Zuiderhof zijaanzicht.",
+                    "Zuiderhof vooraanzicht.",
+                    "Zuiderhof circa 1998. Wegens brandgevaar is hier het rieten dak vervangen door een leistenen dak."
+                ]
+            },
+            { 
+                naam: "Overzicht", 
+                afbeeldingen: ["images/overzicht.jpg"],
+                beschrijvingen: [
+                    "Overzichtskaart van alle landgoederen."
+                ]
+            }
+        ];
+        
+        const huizenGrid = document.getElementById('huizen-grid');
+        huizenData.forEach((huis, index) => {
+            huizenGrid.innerHTML += `
+                <div class="card" onclick="openModal(${index}, 'huizen')">
+                    <div class="card-img" style="background-image: url('${huis.afbeeldingen[0]}'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${huis.naam}</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Ontdek de rijke historie en de prachtige architectuur van ${huis.naam}.</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Collectie Data
+        const collectieData = [
+            { naam: "Kaarten", icon: "fa-map", afbeeldingen: ["images/kaarten.png", "images/kaarten_1.jpg", "images/kaarten_3.jpg", "images/kaarten_4.png", "images/kaarten_5.png", "images/kaarten_6.png", "images/kaarten_7.png", "images/kaarten_8.png", "images/kaarten_9.jpg", "images/kaarten_10.png", "images/kaarten_11.png", "images/kaarten_12.png", "images/kaarten_13.jpg", "images/kaarten_14.png", "images/kaarten_15.png", "images/kaarten_16.jpg", "images/kaarten_17.jpg", "images/kaarten_18.jpg"] },
+            { naam: "Brieven", icon: "fa-envelope-open-text", afbeeldingen: ["images/brieven.png", "images/brieven_1.png", "images/brieven_2.png", "images/brieven_3.png", "images/brieven_4.png", "images/brieven_5.png", "images/brieven_6.png", "images/brieven_7.png", "images/brieven_8.png"] },
+            { naam: "Schetsboekje", icon: "fa-book", afbeeldingen: ["images/schetsboekje.png", "images/schetsboekje_1.png", "images/schetsboekje_2.jpg", "images/schetsboekje_3.jpg", "images/schetsboekje_4.jpg"] },
+            { naam: "Varia", icon: "fa-box-archive", afbeeldingen: ["images/viara.png", "images/viara_1.png", "images/viara_2.png", "images/viara_3.jpg", "images/viara_4.jpg", "images/viara_5.png"] },
+            { naam: "Portretten", icon: "fa-image-portrait", afbeeldingen: ["images/portret.png", "images/portret_1.jpg", "images/portret_2.jpg", "images/portret_3.jpg", "images/portret_4.jpg", "images/portret_5.jpg"] },
+            { naam: "De Russische borden", icon: "fa-circle-notch", afbeeldingen: ["images/russische_borden.jpg", "images/russische_borden_1.jpg", "images/russische_borden_2.jpg", "images/russische_borden_3.jpg", "images/russische_borden_4.jpg", "images/russische_borden_5.jpg"] }
+        ];
+
+        const collectieGrid = document.getElementById('collectie-grid');
+        collectieData.forEach((item, index) => {
+            collectieGrid.innerHTML += `
+                <div class="card" onclick="openModal(${index}, 'collectie')">
+                    <div class="card-img"><i class="fa-solid ${item.icon}"></i></div>
+                    <div class="card-content">
+                        <h3 class="card-title">${item.naam}</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Bekijk de prachtig gedigitaliseerde items uit de categorie ${item.naam}.</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Publicaties Data
+        const publicatiesData = [
+            { naam: "Oud Valkeveen", icon: "fa-book-journal-whills", afbeeldingen: ["images/publicatie_oud_valkeveen.jpg"] },
+            { naam: "Nieuw Valkeveen", icon: "fa-book-journal-whills", afbeeldingen: ["images/publicatie_nieuw_valkeveen.jpg"] },
+            { naam: "Oud Naarden", icon: "fa-book-journal-whills", afbeeldingen: ["images/publicatie_oud_naarden.jpg"] },
+            { naam: "Oude Naardense Buitenplaatsen", icon: "fa-book-journal-whills", afbeeldingen: ["images/publicatie_oude_naardense_buitenplaatsen.jpg"] },
+            { naam: "Tussen Zandbergen en Valkeveen", icon: "fa-book-journal-whills", afbeeldingen: ["images/publicatie_tussen_zandbergen_en_valkeveen.jpg"] },
+            { naam: "Stichting J.P. van Rossum 1991-2006", icon: "fa-book-journal-whills", afbeeldingen: ["images/publicatie_stichting_jp_van_rossum.jpg"] },
+            { naam: "De Omroeper", icon: "fa-newspaper", afbeeldingen: ["images/publicatie_de_omroeper.jpg"] },
+            { naam: "Vogelvluchtkaart, 2002", icon: "fa-map-location-dot", afbeeldingen: ["images/publicatie_vogelvlucht.png"] }
+        ];
+
+        const publicatiesGrid = document.getElementById('publicaties-grid');
+        publicatiesData.forEach((pub, index) => {
+            publicatiesGrid.innerHTML += `
+                <div class="card" onclick="openModal(${index}, 'publicaties')">
+                    <div class="card-img"><i class="fa-solid ${pub.icon}"></i></div>
+                    <div class="card-content">
+                        <h3 class="card-title">${pub.naam}</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Bekijk de afbeeldingen of kaft van ${pub.naam}.</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Donateursdagen Data
+        const donateursdagenData = [
+            { jaar: "1991", desc: "Nieuw Valkeveen", naam: "1991, Nieuw Valkeveen", afbeeldingen: ["images/donateurs_1991_1.jpg"] },
+            { jaar: "1992", desc: "Oprichting van de stichting", naam: "1992, Oprichting van de stichting", afbeeldingen: ["images/donateurs_1992_1.jpg"] },
+            { jaar: "1993", desc: "Berghuis, Nieuw Valkeveen", naam: "1993, Berghuis, Nieuw Valkeveen", afbeeldingen: ["images/donateurs_1993_1.jpg"] },
+            { jaar: "1994", desc: "'s Graeveveldt", naam: "1994, 's Graeveveldt", afbeeldingen: ["images/donateurs_1994_1.jpg"] },
+            { jaar: "1995", desc: "Flevorama", naam: "1995, Flevorama", afbeeldingen: ["images/donateurs_1995_1.jpg"] },
+            { jaar: "1996", desc: "Berghuis, Leeuwenberg", naam: "1996, Berghuis, Leeuwenberg", afbeeldingen: ["images/donateurs_1996_1.jpg"] },
+            { jaar: "1997", desc: "Stadhuis en Archief Naarden, Oud Valkeveen", naam: "1997, Stadhuis en Archief Naarden", afbeeldingen: ["images/donateurs_1997_1.jpg"] },
+            { jaar: "1998", desc: "De Viersprong, Oldenheem, Drafna, Klein Elswout", naam: "1998, De Viersprong e.o.", afbeeldingen: ["images/donateurs_1998_1.jpg"] },
+            { jaar: "1999", desc: "Oud Bussem", naam: "1999, Oud Bussem", afbeeldingen: ["images/donateurs_1999_1.jpg"] },
+            { jaar: "2000", desc: "Oude begraafplaats Jan Tabak, Flevorama", naam: "2000, Oude begraafplaats", afbeeldingen: ["images/donateurs_2000_1.jpg"] },
+            { jaar: "2001", desc: "De Limiten, Kraayenbosch", naam: "2001, De Limiten", afbeeldingen: ["images/donateurs_2001_1.jpg"] },
+            { jaar: "2003", desc: "Berghuis, Monte Casa, Nieuw Valkeveen", naam: "2003, Berghuis e.o.", afbeeldingen: ["images/donateurs_2003_1.jpg"] },
+            { jaar: "2004", desc: "Eukenberg, Naardereng, De Veertien Schepels", naam: "2004, Eukenberg e.o.", afbeeldingen: ["images/donateurs_2004_1.jpg"] },
+            { jaar: "2005", desc: "Zuiderhof", naam: "2005, Zuiderhof", afbeeldingen: ["images/donateurs_2005_1.jpg"] },
+            { jaar: "2006", desc: "Flevorama", naam: "2006, Flevorama", afbeeldingen: ["images/donateurs_2006_1.jpg"] },
+            { jaar: "2007", desc: "Oud Naarden, 's Graeveveldt", naam: "2007, Oud Naarden e.o.", afbeeldingen: ["images/donateurs_2007_1.jpg"] },
+            { jaar: "2008", desc: "Internationaal Theosofisch Centrum, De Duinen", naam: "2008, Theosofisch Centrum", afbeeldingen: ["images/donateurs_2008_1.jpg"] },
+            { jaar: "2009", desc: "De Driest", naam: "2009, De Driest", afbeeldingen: ["images/donateurs_2009_1.jpg"] },
+            { jaar: "2010", desc: "De Viersprong, Nieuw Valkeveen", naam: "2010, De Viersprong", afbeeldingen: ["images/donateurs_2010_1.jpg"] },
+            { jaar: "2011", desc: "Grote Kerk en Stadsarchief Naarden", naam: "2011, Grote Kerk Naarden", afbeeldingen: ["images/donateurs_2011_1.jpg"] },
+            { jaar: "2012", desc: "Oud Valkeveen", naam: "2012, Oud Valkeveen", afbeeldingen: ["images/donateurs_2012_1.jpg"] },
+            { jaar: "2013", desc: "Oud Bussem", naam: "2013, Oud Bussem", afbeeldingen: ["images/donateurs_2013_1.jpg"] },
+            { jaar: "2014", desc: "Internationaal Theosofisch Centrum, De Duinen", naam: "2014, Theosofisch Centrum", afbeeldingen: ["images/donateurs_2014_1.jpg"] },
+            { jaar: "2015", desc: "Berghuis", naam: "2015, Berghuis", afbeeldingen: ["images/donateurs_2015_1.jpg"] },
+            { jaar: "2016", desc: "Stadsarchief Naarden", naam: "2016, Stadsarchief Naarden", afbeeldingen: ["images/donateurs_2016_1.jpg"] },
+            { jaar: "2017", desc: "De Haven van Huizen", naam: "2017, De Haven van Huizen", afbeeldingen: ["images/donateurs_2017_1.jpg"] }
+        ];
+
+        const timeline = document.getElementById('donateursdagen-timeline');
+        donateursdagenData.forEach((dag, index) => {
+            timeline.innerHTML += `
+                <div class="timeline-item" onclick="openModal(${index}, 'donateursdagen')">
+                    <h3 style="color: var(--secondary-color); font-size: 1.5rem; margin-bottom: 5px;">${dag.jaar}</h3>
+                    <p style="font-size: 1.1rem; color: #444;">${dag.desc ? dag.desc : 'Algemene bijeenkomst'}</p>
+                </div>
+            `;
+        });
+
+        // Gegeneraliseerde Modal Slider Logica
+        let currentDataset = [];
+        let currentIndex = 0;
+        let currentImageIndex = 0;
+
+        function openModal(index, type) {
+            if (type === 'huizen') currentDataset = huizenData;
+            else if (type === 'collectie') currentDataset = collectieData;
+            else if (type === 'publicaties') currentDataset = publicatiesData;
+            else if (type === 'donateursdagen') currentDataset = donateursdagenData;
+
+            currentIndex = index;
+            currentImageIndex = 0; // Begin altijd bij de eerste foto
+            
+            if (currentDataset[currentIndex].afbeeldingen && currentDataset[currentIndex].afbeeldingen.length > 0) {
+                updateModalView();
+                document.getElementById('imageModal').classList.add('active');
+            } else {
+                alert("Er zijn nog geen foto's beschikbaar voor dit item.");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            // Zorg er tevens voor dat de tekst gesloten is de volgende keer
+            document.getElementById('modalDescBox').classList.remove('show');
+        }
+
+        // Sluiten door naast de modal te klikken
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        function changeImage(direction) {
+            const item = currentDataset[currentIndex];
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= item.afbeeldingen.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = item.afbeeldingen.length - 1;
+            }
+            
+            updateModalView();
+        }
+
+        // NIEUW: Functie om de extra info/tekst te togglen
+        function toggleInfo() {
+            document.getElementById('modalDescBox').classList.toggle('show');
+        }
+
+        function updateModalView() {
+            const item = currentDataset[currentIndex];
+            const imgSrc = item.afbeeldingen[currentImageIndex];
+            
+            document.getElementById('modalImage').src = imgSrc;
+            
+            const indicator = item.afbeeldingen.length > 1 ? ` (${currentImageIndex + 1}/${item.afbeeldingen.length})` : '';
+            document.getElementById('modalCaption').innerText = item.naam + indicator;
+            
+            const displayArrows = item.afbeeldingen.length > 1 ? 'block' : 'none';
+            document.querySelector('.modal-prev').style.display = displayArrows;
+            document.querySelector('.modal-next').style.display = displayArrows;
+
+            // Nieuw: Check of er een specifieke beschrijving is voor deze specifieke foto
+            const infoIcon = document.getElementById('infoIcon');
+            const descBox = document.getElementById('modalDescBox');
+            
+            // Verberg altijd de tekstbox bij het wisselen van een foto (houd het netjes)
+            descBox.classList.remove('show');
+
+            if (item.beschrijvingen && item.beschrijvingen[currentImageIndex]) {
+                infoIcon.style.display = 'block';
+                descBox.innerHTML = item.beschrijvingen[currentImageIndex];
+            } else {
+                infoIcon.style.display = 'none';
+                descBox.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
